@@ -1,32 +1,28 @@
 <div class="card mat-card">
+    <div *ngIf="usuario">
     <div class="row">
         <div>
-        <img class="img-fluid" src="../../../assets/imagen/foto carla 2.jpg" alt="" id="imgperfil">
-        <div class="btn-edit"><a href="#" class="btn-right"><i class="fa fa-pencil"></i></a>
+        <img class="img-fluid" src="{{usuario.fotoPerfil}}" alt="" id="imgperfil">
+        <div class="btn-edit">
+            <a (click)="onOpenModal('edit')"
+                            class="btn btn outline tooltips"
+                            data-placement="top"
+                            data-toggle="tooltip"
+                            data-original-title="Edit"
+                        ><i class="fa fa-pencil"></i>
+                        </a>
+                    </div>
         </div>
-        </div>
-        <div *ngIf="usuario">
-            <h1> {{usuario.nombre}} {{usuario.apellido}}</h1>
-            <h2>{{usuario.titulo}}</h2>
-            <h2>{{usuario.descripcion}}</h2>
-        </div>
-
-
-        
+        <h1> {{usuario.nombre}} {{usuario.apellido}}</h1>
+        <h2>{{usuario.titulo}}</h2>
+        <h2>{{usuario.descripcion}}</h2>
+        </div>        
         <div>
-            <div id="info-actions">
-                <button type="button" class="btn btn-primary">Tengo interes en</button>
-                <button type="button" class="btn btn-light">Anadir Seccion </button>
-                <button type="button" class="btn btn-light">Mas</button>
-            </div>
+            
         </div>
     </div>
     <div class="perfil">
-                <div class="btn-edit">
-                    <a href="#" class="btn-right">
-                        <i class="fa fa-pencil"></i>
-                    </a>
-                </div>
+                
                 <h1 class="nombre">Sobre mi</h1>
                 <p class="perfil__parrafo"> Soy Carla Pacheco, actualmente me encuentro en la Ciudad Autonoma de Buenos Aires, me intereso
                 la carrera de Desarrollo web y estudie el curso de Full Stack Developer Jr en Argentina Programa, 
@@ -36,7 +32,124 @@
                 cuento con una alta capacidad de adaptación, trabajo en equipo,
                 Me Destaco por mi actitud positiva, organización y responsabilidad.
             </p>
+        </div>
+        
+    <!--Edit modal--> 
+    <div
+        class="modal fade" 
+        id= "editUsuarioModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="UsuarioEditModalLabel"
+        aria-hidden="true"
+    >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateUsuarioModalLabel">
+                    Editar {{ editUsuario?.nombre }}
+                </h5>
+                <button
+                    type="button" 
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form #editForm="ngForm">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input
+                        type="text"
+                        ngModel="{{ editUsuario?.nombre}}"
+                        name="nombre"
+                        class="form-control"
+                        id="nombre"
+                        aria-describedby="nombre"
+                        placeholder="nombre"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Apellido</label>
+                        <input
+                        type="text"
+                        ngModel="{{ editUsuario?.apellido}}"
+                        name="apellido"
+                        class="form-control"
+                        id="apellido"
+                        aria-describedby="apellido"
+                        placeholder="apellido"
+                        >
+                    </div>
+                    <input
+                    type="hidden"
+                    ngModel="{{ editUsuario?.id}}"
+                    name="id"
+                    class="form-control"
+                    id="id"
+                    placeholder=""
+                    />
+                    <div class="form-group">
+                        <label for="titulo">Titulo</label>
+                        <input
+                        type="text"
+                        ngModel="{{ editUsuario?.titulo}}"
+                        name="tiltulo"
+                        class="form-control"
+                        id="titulo"
+                        aria-describedby="titulo"
+                        placeholder="titulo"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                            <input 
+                            type="text"
+                            ngModel="{{editUsuario?.descripcion}}"
+                            name="descripcion"
+                            class="form-control"
+                            id="descripcion"
+                            placeholder="Job title"
+                            >
+                    </div>
+                        <div class="form-group">
+                            <label for="imagenEdu">Foto Perfil</label>
+                            <input
+                                type="text"
+                                ngModel=" {{ editUsuario?.fotoPerfil}}"
+                                name="fotoPerfil"
+                                class="form-control"
+                                id="fotoPerfil"
+                                placeholder="Foto Perfil"
+                                required
+                            />
+                        </div>
+                        <div class="model-footer">
+                            <button
+                                type="button"
+                                id=""
+                                data-dismiss="modal"
+                                class="btn btn-secondary"
+                            >
+                                Cerrar
+                            </button>
+                            <button
+                                    (click)="onUpdateUsuario(editForm.value)"
+                                    data-dismiss="modal"
+                                    class="btn btn-primary"
+                                >
+                                Guardar cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </div>
+    </div>
+    
 </div>
 
 
