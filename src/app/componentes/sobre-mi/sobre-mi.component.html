@@ -1,39 +1,144 @@
 <div class="card mat-card">
     <div *ngIf="usuario">
-    <div class="row">
-        <div>
-        <img class="img-fluid" src="{{usuario.fotoPerfil}}" alt="" id="imgperfil">
-        <div class="btn-edit">
-            <a (click)="onOpenModal('edit')"
+        <div class="row">
+            <img class="img-fluid" src="{{usuario.fotoPerfil}}" alt="" id="imgperfil">
+        </div>
+        <div class="bbtn-edit">
+            <a (click)="onOpenModal('edit', usuario)"
                             class="btn btn outline tooltips"
                             data-placement="top"
                             data-toggle="tooltip"
                             data-original-title="Edit"
                         ><i class="fa fa-pencil"></i>
                         </a>
+                        <a
+                        (click)="onOpenModal('delete', usuario)"
+                        class="btn btn outline-ligh tooltips"
+                        data-placement="top"
+                        data-toggle="tooltip"
+                        data-original-title="Delete"
+                        ><i class="fa fa-times"></i>
+                    </a>
+                        <h1> {{usuario.nombre}} {{usuario.apellido}}</h1>
+                        <h2>{{usuario.titulo}}</h2>
+                        
+                </div>
+                <div class="row">
+                    <div class="col aling-self-end"></div>
+                        <p>{{ usuario.descripcion }}</p>
                     </div>
+                </div>
+            </div>
+        <!-- Add Employee Modal-->
+<div 
+class="modal fade"
+id="addUsuarioModal" 
+tabindex="-1" 
+role="dialog" 
+aria-labelledby="addUsuarioModalLabel" 
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addUsuarioModalLabel">Agregar Usuario</h5>
+            <button
+            type="button" 
+            class="close" 
+            data-dismiss="modal" 
+            aria-label="Close"
+            >
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-        <h1> {{usuario.nombre}} {{usuario.apellido}}</h1>
-        <h2>{{usuario.titulo}}</h2>
-        <h2>{{usuario.descripcion}}</h2>
-        </div>        
-        <div>
-            
+        <div class="modal-body">
+            <form #addForm="ngForm" (ngSubmit)="onAddUsuario(addForm)">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input 
+                    type="text"
+                    ngModel
+                    name="nombre"
+                    class="form-control"
+                    id="nombre"
+                    placeholder="nombre"
+                    />
+                    </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input 
+                    type="text"
+                    ngModel
+                    name="apellido"
+                    class="form-control"
+                    id="apellido"
+                    placeholder="apellido"
+                    />
+                    </div>
+                <div class="form-group">
+                    <label for="name">Titulo</label>
+                    <input 
+                    type="text"
+                    ngModel
+                    name="titulo"
+                    class="form-control"
+                    id="titulo"
+                    placeholder="Titulo"
+                    required
+                    />
+                </div>
+                <input
+                        type="hidden"
+                        ngModel="{{ editUsuario?.id}}"
+                        name="idEdu"
+                        class="form-control"
+                        id="idEdu"
+                        placeholder=""
+                        />
+                <div class="form-group">
+                    <label for="name">Descripcion</label>
+                    <input 
+                    type="text"
+                    ngModel
+                    name="descripcion"
+                    class="form-control"
+                    id="descripcion"
+                    placeholder="descripcion"
+                    />
+                    </div>
+                    <div class="form-group">
+                        <label for="fotoPerfil">fotoPerfil</label>
+                        <input
+                        type="text"
+                        ngModel
+                        name="fotoPerfil"
+                        class="form-control"
+                        id="fotoPerfil"
+                        placeholder="Imagen Url"
+                        required
+                        >
+                        </div>
+                        <div class="model-footer">
+                            <button
+                            type="button"
+                            id="add-usuario-form"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                            >
+                            Cerrar
+                            </button>
+                            <button
+                            [disabled]="addForm.invalid"
+                            type="submit"
+                            class="btn btn-primary"
+                            > añadir cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="perfil">
-                
-                <h1 class="nombre">Sobre mi</h1>
-                <p class="perfil__parrafo"> Soy Carla Pacheco, actualmente me encuentro en la Ciudad Autonoma de Buenos Aires, me intereso
-                la carrera de Desarrollo web y estudie el curso de Full Stack Developer Jr en Argentina Programa, 
-                Full Stack Phyton en Codo a Codo (Agencia de aprendizaje a lo largo de la vida
-                en Buenos Aires).
-                Me Gradué como Lic en Contaduría Publica por la Universidad Santa María en Venezuela,
-                cuento con una alta capacidad de adaptación, trabajo en equipo,
-                Me Destaco por mi actitud positiva, organización y responsabilidad.
-            </p>
-        </div>
-        
     <!--Edit modal--> 
     <div
         class="modal fade" 
@@ -47,7 +152,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="updateUsuarioModalLabel">
-                    Editar {{ editUsuario?.nombre }}
+                    Editar {{ editUsuario?.titulo }}
                 </h5>
                 <button
                     type="button" 
@@ -64,7 +169,7 @@
                         <label for="name">Nombre</label>
                         <input
                         type="text"
-                        ngModel="{{ editUsuario?.nombre}}"
+                        ngModel="{{ editUsuario?.titulo}}"
                         name="nombre"
                         class="form-control"
                         id="nombre"
@@ -73,10 +178,10 @@
                         >
                     </div>
                     <div class="form-group">
-                        <label for="name">Apellido</label>
+                        <label for="apellido">Apellido</label>
                         <input
                         type="text"
-                        ngModel="{{ editUsuario?.apellido}}"
+                        ngModel="{{ editUsuario?.titulo}}"
                         name="apellido"
                         class="form-control"
                         id="apellido"
@@ -116,14 +221,14 @@
                             >
                     </div>
                         <div class="form-group">
-                            <label for="imagenEdu">Foto Perfil</label>
+                            <label for="fotoPerfil">Foto Perfil</label>
                             <input
                                 type="text"
                                 ngModel=" {{ editUsuario?.fotoPerfil}}"
                                 name="fotoPerfil"
                                 class="form-control"
                                 id="fotoPerfil"
-                                placeholder="Foto Perfil"
+                                placeholder="FotoPerfil"
                                 required
                             />
                         </div>
@@ -149,7 +254,61 @@
             </div>
         </div>
     </div>
-    
+<!-- Delete modal -->
+<div
+data-bs-toggle="modal" data-bs-target="#deleteModelLabel"
+    class="modal fade"
+    id="deleteUsuarioModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="deleteModelLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-titulo" id="deleteModelLabel">Borrar Usuario</h5>
+                <button
+                    type="button"
+                    class="close" 
+                    data-dismiss="modal"
+                    aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                esta seguro que quiere eliminar?
+                {{deleteUsuario?.titulo}}?
+            </p>
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                >
+                    No
+                </button>
+                <button
+                    (click)="onDeleteUsuario(deleteUsuario!.id)"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                >
+                    Si
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
+</div>
+<!-- Notificacion for no employes-->
+<div *ngFor="usuario?.legth== 0" class="col-lg-12 col-md-12 col-xl-12">
+<div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">No hay usuario!</h4>
+    <p>usuario no encontradas</p>
+</div>
+</div>
+
 
 

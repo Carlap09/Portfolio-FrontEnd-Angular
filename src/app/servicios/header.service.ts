@@ -14,8 +14,16 @@ export class HeaderService {
 
   public getUser():Observable<Usuario>{
     return this.http.get<Usuario>(`${this.apiServerUrl}/usuario/id/1`);
+
+  }
+  public addUsuario(usuario: Usuario):Observable<Usuario>{
+    return this.http.post<Usuario>(`${this.apiServerUrl}/usuario/add`,usuario);
   }
   public updateUsuario(usuario: Usuario):Observable<Usuario>{
     return this.http.put<Usuario>(`${this.apiServerUrl}/usuario/update`,usuario);
   }
+  public deleteUsuario(UsuarioId:number):Observable<void>{
+    return this.http.delete<void>(`${this.apiServerUrl}/usuario/delete/${UsuarioId}`);
+  }
+
 }

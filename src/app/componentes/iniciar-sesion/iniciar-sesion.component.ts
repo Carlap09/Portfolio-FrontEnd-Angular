@@ -7,13 +7,9 @@ import { FormBuilder, FormGroup,Validators } from '@angular/forms';
   styleUrls: ['./iniciar-sesion.component.css']
 })
 export class IniciarSesionComponent implements OnInit {
-  form: FormGroup;
-
-  constructor(private formBuilder: FormBuilder) {
-    this.form=this.formBuilder.group({
-
-    })
-
+  
+  constructor() {
+    
   }
 
   ngOnInit(): void {

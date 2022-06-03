@@ -1,40 +1,268 @@
 <div class=" card mat-card">
-    <div class="proyecto">
-        <div class="row">
-            <h1>Proyectos</h1>
-            <div class="contenedor">
-            <div class="col-sm-12 col-md-7 col-lg-7 parte1">
-                <div class="btn-edit"><a href="#" class="btn-right"><i class="fa fa-pencil"></i></a>
+    <div class="row proyec main-container"></div>
+        <h1>Proyectos</h1>
+        <div m-5>
+            <button type="button" class="btn btn outline-success" (click)="onOpenModal('add')">
+                <a class="nav-link" style="color: #022278">
+                Agregar proyecto <span class="sr-only"> (current) </span>
+                </a>
+            </button>
+        </div>
+        <div id="main-container">
+            <div *ngFor="let proyectos of proyectos" class="col-lg-12">
+                <div class="container">
+                    <div class="row aling-items-start">
+                        <div class="col-sm-12 col-md-7 col-lg-7 parte1">
+                            <img src="{{proyectos.fotoProyec}}" alt=""  width="150">
+                            <h3>{{ proyectos.nombreProyec }} </h3>
+                            <h3> {{ proyectos.descripcionProyec}}</h3>
+                            <a
+                        (click)="onOpenModal('edit', proyectos)"
+                        class="btn btn-outline-light tooltips "
+                        data-placement="top"
+                        data-toggle="tooltip"
+                        data-original-title="Edit"
+                        ><i class="fa fa-pencil"></i>
+                    </a>
+                    <a
+                        (click)="onOpenModal('delete', proyectos)"
+                        class="btn btn outline-ligh tooltips"
+                        data-placement="top"
+                        data-toggle="tooltip"
+                        data-original-title="Delete"
+                        ><i class="fa fa-times"></i>
+                    </a>
                 </div>
-                <h3>Lucky GeeK</h3>
-                <p>Pagina web de LuckGeek en front end</p>
             </div>
-            <div class="col- sm-12 col-md-3 col-lg-3 offset-md-1 offset-lg-1 parte2">
-            <img src="../../../assets/imagen/LogoLucky.jpg" width="150" class="img-fluid imgproyect">
+        </div>
+        <!-- Add Employee Modal-->
+<div 
+    class="modal fade"
+    id="addProyectosModal" 
+    tabindex="-1" 
+    role="dialog" 
+    aria-labelledby="addProyectosModalLabel" 
+    aria-hidden="true"
+    >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addProyectosModalLabel">Agregar Proyecto</h5>
+                <button
+                type="button" 
+                class="close" 
+                data-dismiss="modal" 
+                aria-label="Close"
+                >
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            </div>
-            <div class="contenedor">
-                <div class="col-sm-12 col-md-7 col-lg-7 parte1">
-                    <div class="btn-edit"><a href="#" class="btn-right"><i class="fa fa-pencil"></i></a>
+            <div class="modal-body">
+                <form #addForm="ngForm" (ngSubmit)="onAddProyectos(addForm)">
+                    <div class="form-group">
+                        <label for="nombreProyec">Nombre</label>
+                        <input 
+                        type="text"
+                        ngModel
+                        name="nombreProyec"
+                        class="form-control"
+                        id="nombreProyec"
+                        placeholder="Nombre"
+                        required
+                        />
                     </div>
-                    <h3>La Ganga 3000</h3>
-                    <p>Pagina con Phyton y Mysql</p>
-                </div>
-                <div class="col- sm-12 col-md-3 col-lg-3 offset-md-1 offset-lg-1 parte2">
-                <img src="../../../assets/imagen/LogoGanga.png" width="150" class="img-fluid imgproyect">
+                    
+                    <div class="form-group">
+                        <label for="descripcionProyec">Descripcion</label>
+                        <input 
+                        type="text"
+                        ngModel
+                        name="descripcionProyec"
+                        class="form-control"
+                        id="descripcionProyec"
+                        placeholder="descripcion"
+                        />
+                        </div>
+                        <div class="form-group">
+                            <label for="fotoProyec">Imagen Url</label>
+                            <input
+                            type="text"
+                            ngModel
+                            name="fotoProyec"
+                            class="form-control"
+                            id="fotoProyec"
+                            placeholder="Imagen"
+                            required
+                            >
+                            </div>
+                            <div class="model-footer">
+                                <button
+                                type="button"
+                                id="add-proyectos-form"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                                >
+                                Cerrar
+                                </button>
+                                <button
+                                [disabled]="addForm.invalid"
+                                type="submit"
+                                class="btn btn-primary"
+                                > añadir cambios
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="contenedor">
-                <div class="col-sm-12 col-md-7 col-lg-7 parte1">
-                    <div class="btn-edit"><a href="#" class="btn-right"><i class="fa fa-pencil"></i></a>
+        </div>
+        <!--Edit modal--> 
+        <div
+            class="modal fade" 
+            id= "editProyectosModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="proyectosEditModalLabel"
+            aria-hidden="true"
+        >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateProyectosModalLabel">
+                        Editar {{ editProyectos?.nombreProyec }}
+                    </h5>
+                    <button
+                        type="button" 
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     </div>
-                    <h3>Portafolio CP</h3>
-                    <p>Portafolio Web con Angular, Spring Boot y Mysql</p>
+                    <div class="modal-body">
+                        <form #editForm="ngForm">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input
+                            type="text"
+                            ngModel="{{ editProyectos?.nombreProyec }}"
+                            name="nombreProyec"
+                            class="form-control"
+                            id="nombreProyec"
+                            aria-describedby="emailHelp"
+                            placeholder="Title"
+                            >
+                        </div>
+                        <input
+                        type="hidden"
+                        ngModel="{{ editProyectos?.idProyec }}"
+                        name="idProyec "
+                        class="form-control"
+                        id="idProyec"
+                        placeholder=""
+                        />
+                        <div class="form-group">
+                            <label for="descripcionProyec">Descripcion</label>
+                                <input 
+                                type="text"
+                                ngModel="{{editProyectos?.descripcionProyec}}"
+                                name="descripcionProyec"
+                                class="form-control"
+                                id="descripcionProyec"
+                                placeholder="Job title"
+                                >
+                        </div>
+                        <div class="form-group">
+                                <label for="fotoProyec">Imagen URL</label>
+                                <input
+                                    type="text"
+                                    ngModel=" {{ editProyectos?.fotoProyec}}"
+                                    name="fotoProyec"
+                                    class="form-control"
+                                    id="fotoProyec"
+                                    placeholder="Image URL"
+                                    required
+                                />
+                            </div>
+                            <div class="model-footer">
+                                <button
+                                    type="button"
+                                    id=""
+                                    data-dismiss="modal"
+                                    class="btn btn-secondary"
+                                >
+                                    Cerrar
+                                </button>
+                                <button
+                                        (click)="onUpdateProyectos(editForm.value)"
+                                        data-dismiss="modal"
+                                        class="btn btn-primary"
+                                    >
+                                    Guardar cambios
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="col- sm-12 col-md-3 col-lg-3 offset-md-1 offset-lg-1 parte2">
-                <img src="../../../assets/imagen/foto carla 2.jpg" width="150" class="img-fluid imgproyect">
+            </div>
+        </div>
+        <!-- Delete modal -->
+        <div
+        data-bs-toggle="modal" data-bs-target="#deleteModelLabel"
+            class="modal fade"
+            id="deleteProyectosModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="deleteModelLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-titulo" id="deleteModelLabel">Borrar Proyecto</h5>
+                        <button
+                            type="button"
+                            class="close" 
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        esta seguro que quiere eliminar?
+                        {{deleteProyectos?.nombreProyec}}?
+                    </p>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                        >
+                            No
+                        </button>
+                        <button
+                            (click)="onDeleteProyectos(deleteProyectos!.idProyec)"
+                            class="btn btn-danger"
+                            data-dismiss="modal"
+                        >
+                            Si
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Notificacion for no employes-->
+    <div *ngFor="proyectos?.legth== 0" class="col-lg-12 col-md-12 col-xl-12">
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">No hay proyectos!</h4>
+            <p>proyecto no encontrado</p>
+        </div>
+    </div>
 </div>
+
+
+
