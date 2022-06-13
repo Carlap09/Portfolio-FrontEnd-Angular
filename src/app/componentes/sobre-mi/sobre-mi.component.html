@@ -1,47 +1,40 @@
 <div class="card mat-card">
-    <div *ngIf="usuario">
+    <div *ngIf="persona">
         <div class="row">
-            <img class="img-fluid" src="{{usuario.fotoPerfil}}" alt="" id="imgperfil">
+            <img class="img-fluid" src="{{persona.fotoPerfil}}" alt="" id="imgperfil">
         </div>
         <div class="bbtn-edit">
-            <a (click)="onOpenModal('edit', usuario)"
+            <a (click)="onOpenModal('edit', persona)"
                             class="btn btn outline tooltips"
                             data-placement="top"
                             data-toggle="tooltip"
                             data-original-title="Edit"
                         ><i class="fa fa-pencil"></i>
                         </a>
-                        <a
-                        (click)="onOpenModal('delete', usuario)"
-                        class="btn btn outline-ligh tooltips"
-                        data-placement="top"
-                        data-toggle="tooltip"
-                        data-original-title="Delete"
-                        ><i class="fa fa-times"></i>
-                    </a>
-                        <h1> {{usuario.nombre}} {{usuario.apellido}}</h1>
-                        <h2>{{usuario.titulo}}</h2>
+                        
+                        <h1> {{persona.nombre}} {{persona.apellido}}</h1>
+                        <h2>{{persona.titulo}}</h2>
                         
                 </div>
                 <div class="row">
                     <div class="col aling-self-end"></div>
-                        <p>{{ usuario.descripcion }}</p>
+                        <p>{{ persona.descripcion }}</p>
                     </div>
                 </div>
             </div>
         <!-- Add Employee Modal-->
 <div 
 class="modal fade"
-id="addUsuarioModal" 
+id="addPersonaModal" 
 tabindex="-1" 
 role="dialog" 
-aria-labelledby="addUsuarioModalLabel" 
+aria-labelledby="addPersonaModalLabel" 
 aria-hidden="true"
 >
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="addUsuarioModalLabel">Agregar Usuario</h5>
+            <h5 class="modal-title" id="addPersonaModalLabel">Agregar Persona</h5>
             <button
             type="button" 
             class="close" 
@@ -52,7 +45,7 @@ aria-hidden="true"
             </button>
         </div>
         <div class="modal-body">
-            <form #addForm="ngForm" (ngSubmit)="onAddUsuario(addForm)">
+            <form #addForm="ngForm" (ngSubmit)="onAddPersona(addForm)">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input 
@@ -89,10 +82,10 @@ aria-hidden="true"
                 </div>
                 <input
                         type="hidden"
-                        ngModel="{{ editUsuario?.id}}"
-                        name="idEdu"
+                        ngModel="{{ editPersona?.id}}"
+                        name="id"
                         class="form-control"
-                        id="idEdu"
+                        id="id"
                         placeholder=""
                         />
                 <div class="form-group">
@@ -121,7 +114,7 @@ aria-hidden="true"
                         <div class="model-footer">
                             <button
                             type="button"
-                            id="add-usuario-form"
+                            id="add-persona-form"
                             class="btn btn-secondary"
                             data-dismiss="modal"
                             >
@@ -142,17 +135,17 @@ aria-hidden="true"
     <!--Edit modal--> 
     <div
         class="modal fade" 
-        id= "editUsuarioModal"
+        id= "editPersonaModal"
         tabindex="-1"
         role="dialog"
-        aria-labelledby="UsuarioEditModalLabel"
+        aria-labelledby="PersonaEditModalLabel"
         aria-hidden="true"
     >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="updateUsuarioModalLabel">
-                    Editar {{ editUsuario?.titulo }}
+                <h5 class="modal-title" id="updatePersonaModalLabel">
+                    Editar {{ editPersona?.titulo }}
                 </h5>
                 <button
                     type="button" 
@@ -169,7 +162,7 @@ aria-hidden="true"
                         <label for="name">Nombre</label>
                         <input
                         type="text"
-                        ngModel="{{ editUsuario?.titulo}}"
+                        ngModel="{{ editPersona?.titulo}}"
                         name="nombre"
                         class="form-control"
                         id="nombre"
@@ -181,7 +174,7 @@ aria-hidden="true"
                         <label for="apellido">Apellido</label>
                         <input
                         type="text"
-                        ngModel="{{ editUsuario?.titulo}}"
+                        ngModel="{{ editPersona?.titulo}}"
                         name="apellido"
                         class="form-control"
                         id="apellido"
@@ -191,7 +184,7 @@ aria-hidden="true"
                     </div>
                     <input
                     type="hidden"
-                    ngModel="{{ editUsuario?.id}}"
+                    ngModel="{{ editPersona?.id}}"
                     name="id"
                     class="form-control"
                     id="id"
@@ -201,7 +194,7 @@ aria-hidden="true"
                         <label for="titulo">Titulo</label>
                         <input
                         type="text"
-                        ngModel="{{ editUsuario?.titulo}}"
+                        ngModel="{{ editPersona?.titulo}}"
                         name="tiltulo"
                         class="form-control"
                         id="titulo"
@@ -213,7 +206,7 @@ aria-hidden="true"
                         <label for="descripcion">Descripcion</label>
                             <input 
                             type="text"
-                            ngModel="{{editUsuario?.descripcion}}"
+                            ngModel="{{editPersona?.descripcion}}"
                             name="descripcion"
                             class="form-control"
                             id="descripcion"
@@ -224,7 +217,7 @@ aria-hidden="true"
                             <label for="fotoPerfil">Foto Perfil</label>
                             <input
                                 type="text"
-                                ngModel=" {{ editUsuario?.fotoPerfil}}"
+                                ngModel=" {{ editPersona?.fotoPerfil}}"
                                 name="fotoPerfil"
                                 class="form-control"
                                 id="fotoPerfil"
@@ -242,7 +235,7 @@ aria-hidden="true"
                                 Cerrar
                             </button>
                             <button
-                                    (click)="onUpdateUsuario(editForm.value)"
+                                    (click)="onUpdatePersona(editForm.value)"
                                     data-dismiss="modal"
                                     class="btn btn-primary"
                                 >
@@ -258,7 +251,7 @@ aria-hidden="true"
 <div
 data-bs-toggle="modal" data-bs-target="#deleteModelLabel"
     class="modal fade"
-    id="deleteUsuarioModal"
+    id="deletePersoanModal"
     tabindex="-1"
     role="dialog"
     aria-labelledby="deleteModelLabel"
@@ -267,7 +260,7 @@ data-bs-toggle="modal" data-bs-target="#deleteModelLabel"
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-titulo" id="deleteModelLabel">Borrar Usuario</h5>
+                <h5 class="modal-titulo" id="deleteModelLabel">Borrar Persona</h5>
                 <button
                     type="button"
                     class="close" 
@@ -280,7 +273,7 @@ data-bs-toggle="modal" data-bs-target="#deleteModelLabel"
             <div class="modal-body">
                 <p>
                 esta seguro que quiere eliminar?
-                {{deleteUsuario?.titulo}}?
+                {{deletePersona?.titulo}}?
             </p>
             <div class="modal-footer">
                 <button
@@ -291,7 +284,7 @@ data-bs-toggle="modal" data-bs-target="#deleteModelLabel"
                     No
                 </button>
                 <button
-                    (click)="onDeleteUsuario(deleteUsuario!.id)"
+                    (click)="onDeletePersona(deletePersona!.id)"
                     class="btn btn-danger"
                     data-dismiss="modal"
                 >
@@ -303,10 +296,10 @@ data-bs-toggle="modal" data-bs-target="#deleteModelLabel"
 </div>
 </div>
 <!-- Notificacion for no employes-->
-<div *ngFor="usuario?.legth== 0" class="col-lg-12 col-md-12 col-xl-12">
+<div *ngFor="persona?.legth== 0" class="col-lg-12 col-md-12 col-xl-12">
 <div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">No hay usuario!</h4>
-    <p>usuario no encontradas</p>
+    <h4 class="alert-heading">No hay persona!</h4>
+    <p>persona no encontrada</p>
 </div>
 </div>
 

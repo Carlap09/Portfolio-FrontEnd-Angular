@@ -8,7 +8,7 @@ import { SobreMiComponent } from './componentes/sobre-mi/sobre-mi.component';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
 import { ExperienciaComponent } from './componentes/experiencia/experiencia.component';
 import { ProyectosComponent } from './componentes/proyectos/proyectos.component';
-import { AptitudesComponent } from './componentes/aptitudes/aptitudes.component';
+import { SkillsComponent } from './componentes/skills/skills.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { HttpClientModule} from '@angular/common/http';
@@ -26,7 +26,7 @@ import { PortfolioComponent } from './componentes/portfolio/portfolio.component'
     EducacionComponent,
     ExperienciaComponent,
     ProyectosComponent,
-    AptitudesComponent,
+    SkillsComponent,
     FooterComponent,
     IniciarSesionComponent,
     PortfolioComponent

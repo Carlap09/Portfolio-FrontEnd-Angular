@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Usuario } from 'src/app/model/usuario';
+import { Persona } from 'src/app/model/persona';
 import { HeaderService } from 'src/app/servicios/header.service';
 
 
@@ -12,50 +12,50 @@ import { HeaderService } from 'src/app/servicios/header.service';
 })
 
 export class SobreMiComponent implements OnInit {
-  public usuario : Usuario | undefined;
-  public editUsuario: Usuario | undefined;
-  public deleteUsuario:Usuario | undefined;
+  public persona : Persona | undefined;
+  public editPersona: Persona | undefined;
+  public deletePersona:Persona | undefined;
   
   constructor(private headerService : HeaderService){ }
 
   ngOnInit(): void {
-    this.getUser();
+    this.getPer();
   }
-  public getUser(): void{
-    this.headerService.getUser().subscribe({
-      next: (response: Usuario) =>{
-        this.usuario=response;
+  public getPer(): void{
+    this.headerService.getPer().subscribe({
+      next: (response: Persona) =>{
+        this.persona=response;
       },
       error:(error:HttpErrorResponse)=>{
         alert(error.message);
       }
   })
   }
-  public onOpenModal(mode:String, usuario?: Usuario):void{
+  public onOpenModal(mode:String, persona?: Persona):void{
     const container=document.getElementById('main-container');
     const button=document.createElement('button');
     button.style.display='none';
     button.setAttribute('data-toggle','modal');
     if(mode==='add'){
-      button.setAttribute('data-target','#addUsuarioModal');
+      button.setAttribute('data-target','#addPersonaModal');
     }else if (mode==='edit'){
-      this.editUsuario=usuario;
-      button.setAttribute('data-target','#editUsuarioModal');
+      this.editPersona=persona;
+      button.setAttribute('data-target','#editPersonaModal');
     }else if (mode==='delete'){
-    this.deleteUsuario=usuario;
-    button.setAttribute('data-target','#deleteUsuarioModal');
+    this.deletePersona=persona;
+    button.setAttribute('data-target','#deletePersonaModal');
   }
 
 
     container?.appendChild(button);
     button.click();
   }
-  public onAddUsuario(addForm: NgForm){
-    document.getElementById('add-usuario-form')?.click();
-    this.headerService.addUsuario(addForm.value).subscribe({
-      next:(response:Usuario)=>{
+  public onAddPersona(addForm: NgForm){
+    document.getElementById('add-persona-form')?.click();
+    this.headerService.addPersona(addForm.value).subscribe({
+      next:(response:Persona)=>{
         console.log(response);
-        this.getUser();
+        this.getPer();
         addForm.reset();
         },
         error:(error:HttpErrorResponse)=>{
@@ -64,24 +64,24 @@ export class SobreMiComponent implements OnInit {
         }
       })
     }
-  public onUpdateUsuario (usuario: Usuario){
-    this.editUsuario=usuario;
-      document.getElementById('add-usuario-form')?.click();
-    this.headerService.updateUsuario(usuario).subscribe({
-      next:(response:Usuario)=>{
+  public onUpdatePersona (persona: Persona){
+    this.editPersona=persona;
+      document.getElementById('add-persona-form')?.click();
+    this.headerService.updatePersona(persona).subscribe({
+      next:(response:Persona)=>{
       console.log(response);
-        this.getUser();
+        this.getPer();
       },
       error:(error:HttpErrorResponse)=>{
         alert(error.message);
       }
       })
     }
-    public onDeleteUsuario(id: number):void{
-      this.headerService.deleteUsuario(id).subscribe({
+    public onDeletePersona(id: number):void{
+      this.headerService.deletePersona(id).subscribe({
         next:(response:void) =>{
           console.log(response);
-          this.getUser();
+          this.getPer();
         },
         error:(error:HttpErrorResponse)=>{
           alert(error.message);

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Usuario } from '../model/usuario';
+import { Persona } from '../model/persona';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +12,18 @@ export class HeaderService {
 
   constructor(private http: HttpClient) { }
 
-  public getUser():Observable<Usuario>{
-    return this.http.get<Usuario>(`${this.apiServerUrl}/usuario/id/1`);
+  public getPer():Observable<Persona>{
+    return this.http.get<Persona>(`${this.apiServerUrl}/persona/id/1`);
 
   }
-  public addUsuario(usuario: Usuario):Observable<Usuario>{
-    return this.http.post<Usuario>(`${this.apiServerUrl}/usuario/add`,usuario);
+  public addPersona(persona: Persona):Observable<Persona>{
+    return this.http.post<Persona>(`${this.apiServerUrl}/persona/add`,persona);
   }
-  public updateUsuario(usuario: Usuario):Observable<Usuario>{
-    return this.http.put<Usuario>(`${this.apiServerUrl}/usuario/update`,usuario);
+  public updatePersona(persona: Persona):Observable<Persona>{
+    return this.http.put<Persona>(`${this.apiServerUrl}/persona/update`,persona);
   }
-  public deleteUsuario(UsuarioId:number):Observable<void>{
-    return this.http.delete<void>(`${this.apiServerUrl}/usuario/delete/${UsuarioId}`);
+  public deletePersona(PersonaId:number):Observable<void>{
+    return this.http.delete<void>(`${this.apiServerUrl}/persona/delete/${PersonaId}`);
   }
 
 }
