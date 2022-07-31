@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Persona } from 'src/app/model/persona';
 import { HeaderService } from 'src/app/servicios/header.service';
+import { PortfolioService } from 'src/app/servicios/portfolio.service';
+
 
 
 @Component({
@@ -14,15 +16,21 @@ import { HeaderService } from 'src/app/servicios/header.service';
 export class SobreMiComponent implements OnInit {
   public persona : Persona | undefined;
   public editPersona: Persona | undefined;
-  public deletePersona:Persona | undefined;
-  
-  constructor(private headerService : HeaderService){ }
+  personas:any;
+    
+  constructor(private headerService : HeaderService, private datosPortfolio:PortfolioService){ }
 
   ngOnInit(): void {
-    this.getPer();
-  }
-  public getPer(): void{
-    this.headerService.getPer().subscribe({
+    this.getPersona;
+    this.datosPortfolio.obtenerDatos().subscribe(data =>{
+      console.log("Datos personales", JSON.stringify(data));
+      this.persona=data[0];
+    })
+  
+  } 
+  
+  public getPersona(): void{
+    this.headerService.getPersona().subscribe({
       next: (response: Persona) =>{
         this.persona=response;
       },
@@ -42,20 +50,19 @@ export class SobreMiComponent implements OnInit {
       this.editPersona=persona;
       button.setAttribute('data-target','#editPersonaModal');
     }else if (mode==='delete'){
-    this.deletePersona=persona;
-    button.setAttribute('data-target','#deletePersonaModal');
   }
 
 
-    container?.appendChild(button);
-    button.click();
+  container?.appendChild(button);
+  button.click();
+
   }
   public onAddPersona(addForm: NgForm){
     document.getElementById('add-persona-form')?.click();
     this.headerService.addPersona(addForm.value).subscribe({
       next:(response:Persona)=>{
         console.log(response);
-        this.getPer();
+        this.getPersona();
         addForm.reset();
         },
         error:(error:HttpErrorResponse)=>{
@@ -70,22 +77,11 @@ export class SobreMiComponent implements OnInit {
     this.headerService.updatePersona(persona).subscribe({
       next:(response:Persona)=>{
       console.log(response);
-        this.getPer();
+        this.getPersona();
       },
       error:(error:HttpErrorResponse)=>{
         alert(error.message);
       }
-      })
-    }
-    public onDeletePersona(id: number):void{
-      this.headerService.deletePersona(id).subscribe({
-        next:(response:void) =>{
-          console.log(response);
-          this.getPer();
-        },
-        error:(error:HttpErrorResponse)=>{
-          alert(error.message);
-        }
       })
     }
 }

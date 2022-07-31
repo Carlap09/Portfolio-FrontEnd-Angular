@@ -1,0 +1,60 @@
+#imgperfil{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: 16px;
+    z-index: 1;
+    box-shadow: 3px 3px 3px #000033;
+    display: block;
+    padding: 10px;
+}
+
+
+
+#sobremi{
+    background-color: #ffff;
+    box-shadow: 3px 3px 3px #000033;
+}
+.sobre{
+    margin:1px;
+    color:#000033;
+    text-align: justify;
+    padding: 5px;
+}
+.sobre__img{
+    display: block;
+    text-align: center;
+}
+.caja{
+    display: flex;
+    text-align: center;
+
+}
+.caja > div{
+    width: 50%;
+    padding: 10px;
+
+}
+.text1{
+    color:#ffffff;
+    text-align:center;
+    padding: 5px;
+    font-size: 4rem;
+}
+.text{
+    color:#ffffff;
+    text-align:center;
+    padding: 5px;
+    font-size: 2rem;
+}
+hr{
+    border-color: #d2a391;
+    margin: 3rem 0;
+}
+
+.imageness{
+    background: url(https://i.ibb.co/xLyQjGV/Pngtree-technological-background-vector-illustration-matrix-1245505.jpg);
+}
+
+
+

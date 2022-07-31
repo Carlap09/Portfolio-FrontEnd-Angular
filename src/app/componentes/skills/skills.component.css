@@ -1,0 +1,28 @@
+.grid div{
+    background: #ecf0f1;
+}
+
+
+.grid{
+    display:grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows:auto;
+    gap: 2em;
+    justify-items: start;
+
+}
+.logo{
+    margin-top:50px;
+    text-align: center;
+}
+#ski{
+    background-color: #ffff;
+    box-shadow: 3px 3px 3px #000033;
+}
+
+h1{
+    color:#ffff;
+    padding: 10px; 
+    background:url(https://i.ibb.co/xLyQjGV/Pngtree-technological-background-vector-illustration-matrix-1245505.jpg)
+}
+

@@ -1,13 +1,46 @@
-<h1 class=" m-6">Iniciar Sesion</h1>
+<div class="card mat-card">
+    <div class="row proyect main-container" id="ini">
+        <div class="modal-dialog text-center">
+        <div class="col-sm-12">
+        <div class="modal-content">
+            <div class="col-12 conte">
+                <img src="../../../assets/imagen/foto carla 2.jpg" id="imgperfil">
+            </div>
+        <form [formGroup]="form" class="m-1" (ngSubmit)="onEnviar($event)">
+                <div class="col-12">
+                    <label for="exampleInputEmail1" class="form-label" ></label>
+                    <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Email" >
+                    <div *ngIf="Email?.errors && Email?.touched">
+                        <p *ngIf="Email?.hasError('required')" class="text-danger">
+                            El Email es requerido.
+                        </p>
+                        <p *ngIf="Email?.hasError('email')" class="text-danger">
+                            El formato del email debe ser valido.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="exampleInputPassword1" class="form-label"></label>
+                    <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div *ngIf="Password?.errors && Password?.touched">
+                    <p *ngIf="Password?.hasError('required')" class="text-danger">
+                        El Paswword es requerido.
+                    </p>
+                </div>
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#000033" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+        <h6>Derechos Reservados CarlaAlexandraPachecoAraujo@ 2022</h6>
+    </div>
+</div>
 
-<form class="m-5">
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
-</form>
+
+            

@@ -7,7 +7,7 @@ import { EducationService } from 'src/app/servicios/education.service';
 @Component({
   selector: 'app-educacion',
   templateUrl: './educacion.component.html',
-  styleUrls: ['./educacion.component.css']
+  styleUrls: ['./educacion.component.css'],
 })
 export class EducacionComponent implements OnInit {
 
@@ -15,12 +15,12 @@ export class EducacionComponent implements OnInit {
   public editEducation: Education | undefined;
   public deleteEducation:Education | undefined;
   
-  constructor(private educationService:EducationService) { }
+  constructor(private educacionService:EducationService) { }
   ngOnInit(): void {
     this.getEducations();
   }
   public getEducations():void{
-    this.educationService.getEducation().subscribe({
+    this.educacionService.getEducation().subscribe({
       next:(Response: Education[]) =>{
         this.educations=Response;
       },
@@ -29,19 +29,19 @@ export class EducacionComponent implements OnInit {
       }
     })
   }
-  public onOpenModal(mode:String, education?: Education):void{
+  public onOpenModal(mode:String, educacion?: Education):void{
     const container=document.getElementById('main-container');
     const button=document.createElement('button');
     button.style.display='none';
-    button.setAttribute('data-toggle','modal');
+    button.setAttribute('data-toggle', 'modal');
     if(mode==='add'){
-      button.setAttribute('data-target','#addEducationModal');
-    }else if (mode==='edit'){
-      this.editEducation=education;
-      button.setAttribute('data-target','#editEducationModal');
-    }else if (mode==='delete'){
-      this.deleteEducation=education;
-      button.setAttribute('data-target','#deleteEducationModal');
+      button.setAttribute('data-target', '#addEducationModal');
+    }else if (mode ==='edit'){
+      this.editEducation=educacion;
+      button.setAttribute('data-target', '#editEducationModal');
+    }else if (mode ==='delete'){
+      this.deleteEducation=educacion;
+      button.setAttribute('data-target', '#deleteEducationModal');
     }
 
     container?.appendChild(button);
@@ -49,7 +49,7 @@ export class EducacionComponent implements OnInit {
   }
   public onAddEducation(addForm: NgForm){
     document.getElementById('add-education-form')?.click();
-    this.educationService.addEducation(addForm.value).subscribe({
+    this.educacionService.addEducation(addForm.value).subscribe({
       next:(response:Education)=>{
         console.log(response);
         this.getEducations();
@@ -61,10 +61,10 @@ export class EducacionComponent implements OnInit {
         }
       })
     }
-    public onUpdateEducation (education: Education){
-      this.editEducation=education;
+    public onUpdateEducation (educacion: Education){
+      this.editEducation=educacion;
         document.getElementById('add-education-form')?.click();
-      this.educationService.updateEducation(education).subscribe({
+      this.educacionService.updateEducation(educacion).subscribe({
         next:(response:Education)=>{
         console.log(response);
           this.getEducations();
@@ -76,7 +76,7 @@ export class EducacionComponent implements OnInit {
       }
     
     public onDeleteEducation(idEdu: number):void{
-      this.educationService.deleteEducation(idEdu).subscribe({
+      this.educacionService.deleteEducation(idEdu).subscribe({
         next:(response:void) =>{
           console.log(response);
           this.getEducations();
@@ -84,6 +84,6 @@ export class EducacionComponent implements OnInit {
         error:(error:HttpErrorResponse)=>{
           alert(error.message);
         }
-      })
-    }
+      });
+    };
   }

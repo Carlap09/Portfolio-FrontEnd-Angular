@@ -1,0 +1,54 @@
+.main-container{
+    background: url(https://i.ibb.co/xLyQjGV/Pngtree-technological-background-vector-illustration-matrix-1245505.jpg);
+    background-size: cover;
+
+}
+
+.modal-content{
+    background:#34058c;
+    opacity: .95;
+    border-radius: 30px;
+    box-shadow: 3px 3px 3px 3px #000033;
+    
+
+}
+
+#imgperfil{
+    margin: 0 auto 20px ;
+    margin-top:30px;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-top: 50px;
+    z-index: 1;
+    box-shadow: 3px 3px 3px #000033;
+    display: block;
+    text-align: center;
+}
+.form-control{
+border: radius 15px;
+background:#D2F0F7;
+}
+.formgroup::before{
+    font-family:"Font Awesome\5 Free";
+    position: absolute;
+    left: 28px;
+    font-size: 22px;
+    padding-top: 4px;
+
+}
+.formgroup#user-group::before{
+    content:"f007";
+}
+.formgroup#contrasena-group::before{
+    content:"\f023";
+}
+button{
+
+    margin: 25px 0 25px;
+
+}
+
+
+
+

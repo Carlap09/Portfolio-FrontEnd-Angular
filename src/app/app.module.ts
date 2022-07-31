@@ -11,11 +11,13 @@ import { ProyectosComponent } from './componentes/proyectos/proyectos.component'
 import { SkillsComponent } from './componentes/skills/skills.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PortfolioService } from './servicios/portfolio.service';
 import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
+import { InterceptorService } from './servicios/interceptor.service';
+import { SoftSkillsComponent } from './soft-skills/soft-skills.component';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { PortfolioComponent } from './componentes/portfolio/portfolio.component'
     SkillsComponent,
     FooterComponent,
     IniciarSesionComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    SoftSkillsComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,9 @@ import { PortfolioComponent } from './componentes/portfolio/portfolio.component'
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [PortfolioService],
+  providers: [PortfolioService,
+  {provide:HTTP_INTERCEPTORS, useClass: InterceptorService, multi:true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

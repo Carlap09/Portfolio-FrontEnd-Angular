@@ -1,295 +1,181 @@
-<div class="row apti main-container">
-    <div class="row skills main-container">
-        <h1>Aptitudes y validaciones</h1>
-        <div class="row">
-            <div id="main-container">
-                <div m-5>
-                    <button type="button" class="btn btn outline-success" (click)="onOpenModal('add')">
-                        <a class="nav-link" style="color: #022278">
-                        Agregar aptitudes <span class="sr-only"> (current) </span>
-                        </a>
-                    </button>
-                    </div>
-                <div *ngFor="let skills of skills" class="col-lg-12">
-                    <div class="container">
-                        
+<div class="card mat-card">
+    <div class="row skills main-container" id="ski">
+        <div>
+        <h1>Skills</h1>
+        <div class="skills">
+            <div m-5>
+                <button type="button" class="btn btn outline-success" (click)="onOpenModal('add')">
+                    <a class="nav-link" style="color: #000033">
+                        Agregar Skills <span class="sr-only"> (current) </span>
+                    </a>
+                </button>
+            </div>
+            </div>
+        
+            <div id="main-container" class="grid">
+                <div *ngFor="let skills of skills">
+                    <div>
                         <div class="row aling-items-start">
-                            <div class="text-center col-sm-4 col-md-4 col-lg-4">
-                            <circle-progress
-                            [percent]="60"
-                            [radius]="50"
-                            [showUnits]="false"
-                            [title]="'{{ skills.nombreSki }}'"
-                            [titleColor]="'#022278'"
-                            [titleFontSize]="'3m'"
-                            [showSubtitle]="false"
-                            [outerStrokeWidth]="5"
-                            [innerStrokeWidth]="2"
-                            [outerStrokeColor]="'#022278'"
-                            [innerStrokeColor]="'#022278'"
-                            [animation]="true"
-                            [animationDuration]="600"
-                            ></circle-progress>
-                            <img src="{{skills.fotoSki}}" alt=""  width="150">
+                            <div>
+                                <h3>{{ skills.nombreSki }}</h3>
                             </div>
-                            <div class="col">
-                                
+                            <div class="logo">
+                                <img class="logo" src="{{ skills.fotoSki }}" alt="" width="50" />
                             </div>
-                            <div class="col text-center">
-                                <h3>{{ skills.porcentaje}}</h3>
-                                <a
-                                    (click)="onOpenModal('edit', skills)"
-                                    class="btn btn-outline-light tooltips "
-                                    data-placement="top"
-                                    data-toggle="tooltip"
-                                    data-original-title="Edit"
-                                ><i class="fa fa-pencil"></i>
-                                </a>
-                                <a
-                                    (click)="onOpenModal('delete', skills)"
-                                    class="btn btn outline-ligh tooltips"
-                                    data-placement="top"
-                                    data-toggle="tooltip"
-                                    data-original-title="Delete"
-                                ><i class="fa fa-times"></i>
-                                </a>
+                            <div class="circle">
+                                <circle-progress
+                                [percent]="30"
+                                [radius]="80" 
+                                [showUnits]="false" 
+                                [title]="'30'"
+                                [titleColor]="'#000033'" 
+                                [titleFontSize]="'10m'" 
+                                [showSubtitle]="true "
+                                [outerStrokeWidth]="5" 
+                                [innerStrokeWidth]="'2'" 
+                                [outerStrokeColor]="'#000033'"
+                                [innerStrokeColor]="'#000033'" 
+                                [animation]="true" 
+                                [animationDuration]="700">
+                                </circle-progress>
+                            </div>
+                                <div class="col text-center">
+                                    <a (click)="onOpenModal('edit', skills)" class="btn btn-outline-light tooltips"
+                                        data-placement="top" data-toggle="tooltip" data-original-title="edit"><i
+                                            class="fa fa-pencil"></i>
+                                    </a>
+                                    <a (click)="onOpenModal('delete', skills)" class="btn btn outline-ligh tooltips"
+                                        data-placement="top" data-toggle="tooltip" data-original-title="delete"><i
+                                            class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- Add Employee Modal-->
+                <div class="modal fade" id="addSkillsModal" tabindex="-1" role="dialog"
+                    aria-labelledby="addSkillsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addSkillsModalLabel">
+                                    Agregar Aptitudes
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form #addForm="ngForm" (ngSubmit)="onAddSkills(addForm)">
+                                    <div class="form-group">
+                                        <label for="name">Nombre</label>
+                                        <input type="text" ngModel name="nombreSki" class="form-control" id="nombreSki"
+                                            placeholder="Nombre" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fotoSki">Imagen</label>
+                                        <input type="text" ngModel name="fotoSki" class="form-control" id="fotoSki"
+                                            placeholder="imagen" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="porcentaje">Porcentaje</label>
+                                        <input type="text" ngModel name="porcentaje" class="form-control"
+                                            id="porcentaje" placeholder="porcentaje" />
+                                    </div>
+                                    <div class="model-footer">
+                                        <button type="button" id="add-skills-form" class="btn btn-secondary"
+                                            data-dismiss="modal">
+                                            Cerrar
+                                        </button>
+                                        <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">
+                                            añadir cambios
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit modal-->
+                <div class="modal fade" id="editSkillsModal" tabindex="-1" role="dialog"
+                    aria-labelledby="skillsEditModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="updateSkillsModalLabel">
+                                    Editar {{ editSkills?.nombreSki }}
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form #editForm="ngForm">
+                                    <div class="form-group">
+                                        <label for="name">Nombre</label>
+                                        <input type="text" ngModel="{{ editSkills?.nombreSki }}" name="nombreSki"
+                                            class="form-control" id="nombreSki" aria-describedby="emailHelp"
+                                            placeholder="Nombre" />
+                                    </div>
+                                    <input type="hidden" ngModel="{{ editSkills?.idSki }}" name="idSki"
+                                        class="form-control" id="idSki" placeholder="" />
+                                    <div class="form-group">
+                                        <label for="fotoApti">Imagen</label>
+                                        <input type="text" ngModel="{{ editSkills?.fotoSki }}" name="fotoSki"
+                                            class="form-control" id="fotoSki" placeholder="Job title" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="porcentaje">Porcentaje</label>
+                                        <input type="text" ngModel="{{ editSkills?.porcentaje }}" name="porcentaje"
+                                            class="form-control" id="porcentaje" placeholder="job title" />
+                                    </div>
+                                    <div class="model-footer">
+                                        <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">
+                                            Cerrar
+                                        </button>
+                                        <button (click)="onUpdateSkills(editForm.value)" data-dismiss="modal"
+                                            class="btn btn-primary">
+                                            Guardar cambios
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete modal -->
+                <div data-bs-toggle="modal" data-bs-target="#deleteModelLabel" class="modal fade" id="deleteSkillsModal"
+                    tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModelLabel">
+                                    Borrar Aptitud
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    esta seguro que quiere eliminar?
+                                    {{ deleteSkills?.nombreSki }}?
+                                </p>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        No
+                                    </button>
+                                    <button (click)="onDeleteSkills(deleteSkills!.idSki)" class="btn btn-danger"
+                                        data-dismiss="modal">
+                                        Si
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col aling-self-end">
-                                <p>{{ skills.nombreSki }}</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>               
-        <!-- Add Employee Modal-->
-        <div 
-        class="modal fade"
-        id="addSkillsModal" 
-        tabindex="-1" 
-        role="dialog" 
-        aria-labelledby="addSkillsModalLabel" 
-        aria-hidden="true"
-    >
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addSkillsModalLabel">Agregar Aptitudes</h5>
-                <button
-                type="button" 
-                class="close" 
-                data-dismiss="modal" 
-                aria-label="Close"
-                >
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
-            <div class="modal-body">
-                <form #addForm="ngForm" (ngSubmit)="onAddSkills(addForm)">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input 
-                        type="text"
-                        ngModel
-                        name="nombreSki"
-                        class="form-control"
-                        id="nombreSki"
-                        placeholder="Nombre"
-                        required
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="fotoSki">Imagen</label>
-                        <input 
-                        type="text"
-                        ngModel
-                        name="fotoSki"
-                        class="form-control"
-                        id="fotoSki"
-                        placeholder="imagen"
-                        required
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label for="porcentaje">Porcentaje</label>
-                        <input 
-                        type="text"
-                        ngModel
-                        name="porcentaje"
-                        class="form-control"
-                        id="porcentaje"
-                        placeholder="porcentaje"
-                        />
-                        </div>
-                        <div class="model-footer">
-                                <button
-                                type="button"
-                                id="add-skills-form"
-                                class="btn btn-secondary"
-                                data-dismiss="modal"
-                                >
-                                Cerrar
-                                </button>
-                                <button
-                                [disabled]="addForm.invalid"
-                                type="submit"
-                                class="btn btn-primary"
-                                > añadir cambios
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Edit modal--> 
-        <div
-            class="modal fade" 
-            id= "editSkillsModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="skillsEditModalLabel"
-            aria-hidden="true"
-        >
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="updateSkillsModalLabel">
-                        Editar {{ editSkills?.nombreSki }}
-                    </h5>
-                    <button
-                        type="button" 
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                    >
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <form #editForm="ngForm">
-                        <div class="form-group">
-                            <label for="name">Nombre</label>
-                            <input
-                            type="text"
-                            ngModel="{{ editSkills?.nombreSki}}"
-                            name="nombreSki"
-                            class="form-control"
-                            id="nombreSki"
-                            aria-describedby="emailHelp"
-                            placeholder="Nombre"
-                            >
-                        </div>
-                        <input
-                        type="hidden"
-                        ngModel="{{ editSkills?.idSki}}"
-                        name="idSki"
-                        class="form-control"
-                        id="idSki"
-                        placeholder=""
-                        />
-                        <div class="form-group">
-                            <label for="fotoApti">Imagen</label>
-                                <input 
-                                type="text"
-                                ngModel="{{editSkills?.fotoSki}}"
-                                name="fotoSki"
-                                class="form-control"
-                                id="fotoSki"
-                                placeholder="Job title"
-                                >
-                        </div>
-                        <div class="form-group">
-                            <label for="porcentaje">Porcentaje</label>
-                            <input
-                                type="text"
-                                ngModel="{{editSkills?.porcentaje}}"
-                                name="porcentaje"
-                                class="form-control"
-                                id="porcentaje"
-                                placeholder="job title"
-                                />                                       
-                        </div>
-                        <div class="model-footer">
-                                <button
-                                    type="button"
-                                    id=""
-                                    data-dismiss="modal"
-                                    class="btn btn-secondary"
-                                >
-                                    Cerrar
-                                </button>
-                                <button
-                                        (click)="onUpdateSkills(editForm.value)"
-                                        data-dismiss="modal"
-                                        class="btn btn-primary"
-                                    >
-                                    Guardar cambios
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Delete modal -->
-        <div
-        data-bs-toggle="modal" data-bs-target="#deleteModelLabel"
-            class="modal fade"
-            id="deleteSkillsModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="deleteModelLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModelLabel">Borrar Aptitud</h5>
-                        <button
-                            type="button"
-                            class="close" 
-                            data-dismiss="modal"
-                            aria-label="Close"
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                        esta seguro que quiere eliminar?
-                        {{deleteSkills?.nombreSki}}?
-                    </p>
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                        >
-                            No
-                        </button>
-                        <button
-                            (click)="onDeleteSkills(deleteSkills!.idSki)"
-                            class="btn btn-danger"
-                            data-dismiss="modal"
-                        >
-                            Si
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Notificacion for no employes-->
-    <div *ngFor="skills?.legth== 0" class="col-lg-12 col-md-12 col-xl-12">
-        <div class="alert alert-info" role="alert">
-            <h4 class="alert-heading">No hay aptitudes!</h4>
-            <p>aptitudes no encontradas</p>
-        </div>
-    </div>
 </div>
-
-

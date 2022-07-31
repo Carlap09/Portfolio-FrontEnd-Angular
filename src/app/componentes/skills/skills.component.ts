@@ -7,7 +7,7 @@ import { SkillsService } from 'src/app/servicios/skills.service';
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.css']
+  styleUrls: ['./skills.component.css'],
 })
 export class SkillsComponent implements OnInit {
 
@@ -18,6 +18,7 @@ export class SkillsComponent implements OnInit {
   constructor(private skillsService:SkillsService) { }
   ngOnInit(): void {
     this.getSkills();
+
   }
   public getSkills():void{
     this.skillsService.getSkills().subscribe({

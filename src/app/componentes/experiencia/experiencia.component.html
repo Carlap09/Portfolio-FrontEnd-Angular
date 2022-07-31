@@ -1,4 +1,5 @@
-<div class="row exp main-container">
+<div class="row exp main-container" id="expe">
+    <div>
     <h1>Experiencia</h1>
     <div m-5>
         <button type="button" class="btn btn outline-success" (click)="onOpenModal('add')">
@@ -7,6 +8,7 @@
             </a>
         </button>
     </div>
+    
     <div id="main-container">
         <div *ngFor="let experiencia of experiencia" class="col-lg-12">
             <div class="container">
@@ -43,6 +45,7 @@
                 <p>{{ experiencia.descExp }}</p>
             </div>
         </div>
+        <hr>
     
 </div>
 <!-- Add Employee Modal-->
@@ -287,12 +290,6 @@
             </div>
         </div>
     </div>
-    <!-- Notificacion for no employes-->
-    <div *ngFor="experiencia?.legth== 0" class="col-lg-12 col-md-12 col-xl-12">
-        <div class="alert alert-info" role="alert">
-            <h4 class="alert-heading">No hay experiencia!</h4>
-            <p>experiencia no encontradas</p>
-        </div>
     </div>
 </div>
 

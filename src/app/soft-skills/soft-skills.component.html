@@ -1,0 +1,181 @@
+<div class="card mat-card">
+    <div class="row softSkills main-container" id="softSki">
+        <div>
+        <h1>Soft Skills</h1>
+        <div class="softSkills">
+            <div m-5>
+                <button type="button" class="btn btn outline-success" (click)="onOpenModal('add')">
+                    <a class="nav-link" style="color: #022278">
+                        Agregar Soft <span class="sr-only"> (current) </span>
+                    </a>
+                </button>
+            </div>
+            </div>
+        
+            <div id="main-container" class="grid">
+                <div *ngFor="let softSkills of softSkills">
+                    <div>
+                        <div class="row aling-items-start">
+                            <div>
+                                <h3>{{ softSkills.nombreSoftSki }}</h3>
+                            </div>
+                            <div class="logo">
+                                <img class="logo" src="{{ softSkills.fotoSoftSki }}" alt="" width="150" />
+                            </div>
+                            <div class="circle">
+                                <circle-progress
+                                [percent]="80"
+                                [radius]="80" 
+                                [showUnits]="false" 
+                                [title]="'80'"
+                                [titleColor]="'#000033'" 
+                                [titleFontSize]="'10m'" 
+                                [showSubtitle]="true "
+                                [outerStrokeWidth]="5" 
+                                [innerStrokeWidth]="'2'" 
+                                [outerStrokeColor]="'#000033'"
+                                [innerStrokeColor]="'#000033'" 
+                                [animation]="true" 
+                                [animationDuration]="700">
+                                </circle-progress>
+                            </div>
+                                <div class="col text-center">
+                                    <a (click)="onOpenModal('edit', softSkills)" class="btn btn-outline-light tooltips"
+                                        data-placement="top" data-toggle="tooltip" data-original-title="edit"><i
+                                            class="fa fa-pencil"></i>
+                                    </a>
+                                    <a (click)="onOpenModal('delete', softSkills)" class="btn btn outline-ligh tooltips"
+                                    data-placement="top" data-toggle="tooltip" data-original-title="delete"><i
+                                            class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- Add Employee Modal-->
+                <div class="modal fade" id="addSoftSkillsModal" tabindex="-1" role="dialog"
+                    aria-labelledby="addSoftSkillsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addSoftSkillsModalLabel">
+                                    Agregar Aptitudes
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form #addForm="ngForm" (ngSubmit)="onAddSoftSkills(addForm)">
+                                    <div class="form-group">
+                                        <label for="name">Nombre</label>
+                                        <input type="text" ngModel name="nombreSoftSki" class="form-control" id="nombreSoftSki"
+                                            placeholder="Nombre" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fotoSoftSki">Imagen</label>
+                                        <input type="text" ngModel name="fotoSoftSki" class="form-control" id="fotoSoftSki"
+                                            placeholder="imagen" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="porcentajeSoft">Porcentaje</label>
+                                        <input type="text" ngModel name="porcentajeSoft" class="form-control"
+                                            id="porcentajeSoft" placeholder="porcentajeSoft" />
+                                    </div>
+                                    <div class="model-footer">
+                                        <button type="button" id="add-softSkills-form" class="btn btn-secondary"
+                                            data-dismiss="modal">
+                                            Cerrar
+                                        </button>
+                                        <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">
+                                            añadir cambios
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit modal-->
+                <div class="modal fade" id="editSoftSkillsModal" tabindex="-1" role="dialog"
+                    aria-labelledby="softSkillsEditModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="updateSoftSkillsModalLabel">
+                                    Editar {{ editSoftSkills?.nombreSoftSki }}
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form #editForm="ngForm">
+                                    <div class="form-group">
+                                        <label for="name">Nombre</label>
+                                        <input type="text" ngModel="{{ editSoftSkills?.nombreSoftSki }}" name="nombreSoftSki"
+                                            class="form-control" id="nombreSoftSki" aria-describedby="emailHelp"
+                                            placeholder="Nombre" />
+                                    </div>
+                                    <input type="hidden" ngModel="{{ editSoftSkills?.idSoftSki }}" name="idSoftSki"
+                                        class="form-control" id="idSoftSki" placeholder="" />
+                                    <div class="form-group">
+                                        <label for="fotoApti">Imagen</label>
+                                        <input type="text" ngModel="{{ editSoftSkills?.fotoSoftSki }}" name="fotoSoftSki"
+                                            class="form-control" id="fotoSoftSki" placeholder="Job title" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="porcentajeSoft">Porcentaje</label>
+                                        <input type="text" ngModel="{{ editSoftSkills?.porcentajeSoft }}" name="porcentajeSoft"
+                                            class="form-control" id="porcentajeSoft" placeholder="job title" />
+                                    </div>
+                                    <div class="model-footer">
+                                        <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">
+                                            Cerrar
+                                        </button>
+                                        <button (click)="onUpdateSoftSkills(editForm.value)" data-dismiss="modal"
+                                            class="btn btn-primary">
+                                            Guardar cambios
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete modal -->
+                <div data-bs-toggle="modal" data-bs-target="#deleteModelLabel" class="modal fade" id="deleteSoftSkillsModal"
+                    tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModelLabel">
+                                    Borrar Aptitud
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    esta seguro que quiere eliminar?
+                                    {{ deleteSoftSkills?.nombreSoftSki }}?
+                                </p>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        No
+                                    </button>
+                                    <button (click)="onDeleteSoftSkills(deleteSoftSkills!.idSoftSki)" class="btn btn-danger"
+                                        data-dismiss="modal">
+                                        Si
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
