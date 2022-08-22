@@ -7,7 +7,7 @@ import { SoftSkills } from '../model/softSkills';
   providedIn: 'root'
 })
 export class SoftSkillsService {
-  private apiServerUrl="http://localhost:8080";
+  private apiServerUrl="https://apcarlapacheco.herokuapp.com/";
 
   constructor(private http:HttpClient) { }
   public getSoftSkills():Observable<SoftSkills[]>{

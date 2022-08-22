@@ -7,7 +7,7 @@ import { Proyectos } from '../model/proyectos';
   providedIn: 'root'
 })
 export class ProyectosService {
-  private apiServerUrl="http://localhost:8080";
+  private apiServerUrl="https://apcarlapacheco.herokuapp.com/";
   constructor(private http:HttpClient) { }
 
   public getProyectos():Observable<Proyectos[]>{

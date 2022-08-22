@@ -7,7 +7,7 @@ import { Persona } from '../model/persona';
   providedIn: 'root'
 })
 export class PortfolioService {
-  url:string="http://localhost:8080";
+  url:string="https://apcarlapacheco.herokuapp.com/";
   constructor(private http:HttpClient) { }
 
   obtenerDatos():Observable<any>
